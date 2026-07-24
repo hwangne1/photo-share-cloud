@@ -376,23 +376,21 @@ def login(user: UserAuth):
 # -----------------------------------------------------------------
 # 5.4. API LẤY DANH SÁCH FILE TỪ S3
 # -----------------------------------------------------------------
-
 @app.get("/list-files")
 def list_user_files(
     authorization: str = Header(...),
 ):
     # Xác minh JWT và lấy username trực tiếp từ token.
     username = verify_access_token(authorization)
-    # Đọc danh sách ảnh yêu thích của user.
-    # Dùng .get() để tương thích với tài khoản cũ.
-   # Đọc database của user.
-db = read_db()
 
-# Danh sách yêu thích.
-favorites = db.get(username, {}).get("favorites", [])
+    # Đọc database của user.
+    db = read_db()
 
-# Danh sách file trong thùng rác.
-trash = db.get(username, {}).get("trash", [])
+    # Danh sách yêu thích.
+    favorites = db.get(username, {}).get("favorites", [])
+
+    # Danh sách file trong thùng rác.
+    trash = db.get(username, {}).get("trash", [])
 
     s3_client = get_s3_client()
     prefix = f"{username}/"
@@ -416,17 +414,13 @@ trash = db.get(username, {}).get("trash", [])
                 )
 
                 file_list.append(
-    {
-        "storage_path": storage_path,
-        "signed_url": signed_url,
-
-        # Trạng thái yêu thích.
-        "is_favorite": storage_path in favorites,
-
-        # Trạng thái thùng rác.
-        "is_trashed": storage_path in trash,
-    }
-)
+                    {
+                        "storage_path": storage_path,
+                        "signed_url": signed_url,
+                        "is_favorite": storage_path in favorites,
+                        "is_trashed": storage_path in trash,
+                    }
+                )
 
         return {
             "status": "success",

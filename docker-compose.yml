@@ -1,0 +1,56 @@
+# ================================================================
+# DOCKER COMPOSE - PHOTO SHARE CLOUD
+# Khởi chạy đồng thời Backend FastAPI và Frontend React/Nginx
+# ================================================================
+
+services:
+  # --------------------------------------------------------------
+  # SERVICE 1: BACKEND FASTAPI
+  # --------------------------------------------------------------
+  backend:
+    # Build image từ Dockerfile nằm trong thư mục backend
+    build:
+      context: ./backend
+
+    container_name:
+      photo-share-backend
+
+      # Chỉ mở cổng 8000 bên trong Docker network.
+    # Không public trực tiếp ra Internet.
+    expose:
+      - "8000"
+    # Nạp các biến môi trường AWS từ file .env
+    env_file:
+      - ./backend/.env
+
+    # Mount CloudFront Private Key vào container ở chế độ chỉ đọc
+    volumes:
+      - ./backend/private_key.pem:/app/private_key.pem:ro
+
+      # Giữ dữ liệu tài khoản khi container được tạo lại
+      - ./backend/users_db.json:/app/users_db.json
+
+    # Tự động khởi động lại nếu container gặp lỗi hoặc EC2 reboot
+    restart: unless-stopped
+
+  # --------------------------------------------------------------
+  # SERVICE 2: FRONTEND REACT + NGINX
+  # --------------------------------------------------------------
+  frontend:
+    # Build Frontend và truyền địa chỉ Backend API cho Vite
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
+
+    container_name: photo-share-frontend
+
+    # Website được truy cập qua HTTP port 80
+    ports:
+      - "80:80"
+
+    # Khởi động Backend trước Frontend
+    depends_on:
+      - backend
+
+    restart: unless-stopped

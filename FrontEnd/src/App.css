@@ -1,0 +1,2100 @@
+/* ================================================================
+   CLOUDDRIVE SEC - MODERN CLOUD UI
+   Phong cách: Cloud hiện đại / sáng / tối giản / chuyên nghiệp
+   ================================================================ */
+
+/* ================================================================
+   ZONE 1: DESIGN SYSTEM - BIẾN GIAO DIỆN TOÀN CỤC
+   ---------------------------------------------------------------
+   Tập trung màu sắc, kích thước và hiệu ứng tại một nơi.
+   Sau này muốn đổi theme chỉ cần chỉnh các biến bên dưới.
+   ================================================================ */
+
+:root {
+  /* Màu thương hiệu chính */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+  --primary-soft: #dbeafe;
+
+  /* Màu nền */
+  --bg-app: #f6f8fc;
+  --bg-sidebar: #ffffff;
+  --bg-content: #ffffff;
+  --bg-hover: #f3f6fb;
+  --bg-selected: #e8f0fe;
+
+  /* Màu chữ */
+  --text-primary: #1f2937;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  /* Đường viền */
+  --border-light: #e5e7eb;
+  --border-medium: #d7dce5;
+
+  /* Trạng thái */
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --success: #16a34a;
+
+  /* Hiệu ứng */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.16);
+
+  /* Bo góc */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  /* Kích thước layout */
+  --sidebar-width: 260px;
+  --header-height: 76px;
+
+  /* Animation */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* ================================================================
+   ZONE 2: RESET BỔ SUNG CHO APP
+   ================================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ================================================================
+   ZONE 3: LAYOUT TỔNG THỂ
+   ---------------------------------------------------------------
+   Sidebar cố định bên trái.
+   Main Content chiếm toàn bộ không gian còn lại.
+   ================================================================ */
+
+.drive-layout {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+
+  overflow: hidden;
+
+  background: var(--bg-app);
+
+  color: var(--text-primary);
+}
+
+/* ================================================================
+   ZONE 4: SIDEBAR - THANH ĐIỀU HƯỚNG BÊN TRÁI
+   ================================================================ */
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px 16px;
+
+  background: var(--bg-sidebar);
+
+  border-right: 1px solid var(--border-light);
+
+  position: relative;
+  z-index: 20;
+}
+
+/* Logo thương hiệu CloudDrive Sec */
+.logo {
+  margin: 0 8px 28px;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: var(--text-primary);
+
+  letter-spacing: -0.4px;
+}
+
+/* ================================================================
+   ZONE 5: NÚT "MỚI"
+   ================================================================ */
+
+.new-btn-wrapper {
+  position: relative;
+
+  margin-bottom: 24px;
+}
+
+/* Nút tạo mới / upload */
+.btn-new {
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: var(--primary);
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Hiệu ứng khi rê chuột */
+.btn-new:hover {
+  background: var(--primary-hover);
+
+  transform: translateY(-1px);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* Hiệu ứng khi nhấn */
+.btn-new:active {
+  transform: translateY(0);
+}
+
+/* Biểu tượng dấu cộng */
+.plus-icon {
+  font-size: 24px;
+  font-weight: 300;
+
+  line-height: 1;
+}
+
+/* ================================================================
+   ZONE 6: MENU ĐIỀU HƯỚNG SIDEBAR
+   ================================================================ */
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/* Từng mục menu */
+.menu-item {
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* Hover menu */
+.menu-item:hover {
+  background: var(--bg-hover);
+
+  color: var(--text-primary);
+}
+
+/* Menu đang được chọn */
+.menu-item.active {
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  font-weight: 600;
+}
+
+/* ================================================================
+   ZONE 7: MAIN CONTENT
+   ---------------------------------------------------------------
+   Khu vực chính chiếm toàn bộ phần còn lại của màn hình.
+   ================================================================ */
+
+.main-content {
+  flex: 1;
+
+  min-width: 0;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: var(--bg-content);
+}
+/* ================================================================
+   ZONE 8: HEADER - THANH ĐIỀU HƯỚNG PHÍA TRÊN
+   ---------------------------------------------------------------
+   Chứa:
+   - Thanh tìm kiếm tài nguyên
+   - Thông tin người dùng
+   - Nút đăng xuất
+   ================================================================ */
+
+.header {
+  min-height: var(--header-height);
+  height: var(--header-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding: 14px 28px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid var(--border-light);
+
+  position: relative;
+  z-index: 15;
+}
+
+/* ================================================================
+   ZONE 9: SEARCH BOX - THANH TÌM KIẾM
+   ================================================================ */
+
+.search-box {
+  width: min(620px, 60%);
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 18px;
+
+  background: #f1f5f9;
+
+  border: 1px solid transparent;
+  border-radius: 14px;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Icon tìm kiếm */
+.search-box > span {
+  flex-shrink: 0;
+
+  font-size: 17px;
+
+  opacity: 0.65;
+}
+
+/* Ô nhập tìm kiếm */
+.search-box input {
+  width: 100%;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text-primary);
+
+  font-size: 14px;
+}
+
+/* Màu chữ placeholder */
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Làm nổi bật toàn bộ thanh tìm kiếm khi đang nhập */
+.search-box:focus-within {
+  background: #ffffff;
+
+  border-color: var(--primary-soft);
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+/* ================================================================
+   ZONE 10: USER ACTIONS - THÔNG TIN NGƯỜI DÙNG
+   ================================================================ */
+
+.user-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-shrink: 0;
+}
+
+/*
+   App.jsx hiện đang dùng một <span> trực tiếp để hiển thị username.
+   Selector này làm đẹp phần đó mà chưa cần sửa JSX ngay.
+*/
+.user-actions > span {
+  max-width: 180px;
+
+  margin-right: 0 !important;
+
+  padding: 8px 12px;
+
+  overflow: hidden;
+
+  color: var(--text-secondary) !important;
+
+  font-size: 14px;
+  font-weight: 600 !important;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  border-radius: 10px;
+
+  background: #f8fafc;
+}
+
+/* ================================================================
+   ZONE 11: BUTTON SYSTEM - HỆ THỐNG NÚT CƠ BẢN
+   ================================================================ */
+
+.btn {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 16px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* Nút dạng viền - hiện đang dùng cho Đăng xuất */
+.btn-outline {
+  background: #ffffff;
+
+  color: var(--text-secondary);
+
+  border-color: var(--border-medium);
+}
+
+.btn-outline:hover {
+  background: #f8fafc;
+
+  color: var(--primary);
+
+  border-color: var(--primary-soft);
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
+}
+
+/* ================================================================
+   ZONE 12: DROPDOWN MENU
+   ---------------------------------------------------------------
+   Được sử dụng cho:
+   - Menu nút "Mới"
+   - Menu ba chấm của từng ảnh
+   ================================================================ */
+
+.dropdown-menu {
+  min-width: 220px;
+
+  padding: 8px;
+
+  position: absolute;
+
+  background: #ffffff;
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-lg);
+
+  z-index: 100;
+
+  animation: dropdownFadeIn 0.16s ease-out;
+}
+
+/* Menu của nút "Mới" */
+.new-dropdown {
+  top: calc(100% + 8px);
+  left: 0;
+
+  width: 100%;
+  min-width: 230px;
+}
+
+/* Từng lựa chọn bên trong Dropdown */
+.dropdown-item {
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 9px 12px;
+
+  border-radius: 8px;
+
+  color: var(--text-primary);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.dropdown-item:hover {
+  background: var(--primary-light);
+
+  color: var(--primary);
+}
+
+/* Đường phân cách giữa các nhóm chức năng */
+.divider {
+  height: 1px;
+
+  margin: 7px 4px;
+
+  background: var(--border-light);
+}
+
+/* ================================================================
+   ZONE 13: INPUT FILE ẨN
+   ---------------------------------------------------------------
+   Input vẫn tồn tại để mở File Picker nhưng không hiển thị.
+   ================================================================ */
+
+.hidden-input {
+  display: none;
+}
+
+/* ================================================================
+   ZONE 14: ANIMATION CHO DROPDOWN
+   ================================================================ */
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+}
+/* ================================================================
+   ZONE 15: KHU VỰC NỘI DUNG DRIVE
+   ---------------------------------------------------------------
+   Đây là vùng nằm bên dưới Header và chứa:
+   - Breadcrumb
+   - Thanh thao tác khi chọn file
+   - Danh sách tài nguyên Cloud
+   ================================================================ */
+
+.main-content > div:not(.loading-overlay) {
+  min-height: 0;
+}
+
+/* ================================================================
+   ZONE 16: BREADCRUMB - ĐƯỜNG DẪN THƯ MỤC
+   ================================================================ */
+
+.breadcrumb-area {
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px 4px !important;
+}
+
+/* Tiêu đề trang */
+.page-title {
+  margin: 0 !important;
+
+  color: var(--text-primary) !important;
+
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
+/* Thư mục gốc "Drive của tôi" */
+.root-crumb {
+  padding: 7px 10px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.root-crumb:hover {
+  background: var(--primary-light);
+
+  color: var(--primary);
+}
+
+/* Thư mục con hiện tại */
+.sub-crumb {
+  color: var(--text-secondary) !important;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ================================================================
+   ZONE 17: LIST SECTION - KHUNG CHỨA DANH SÁCH FILE
+   ---------------------------------------------------------------
+   Đây cũng là vùng nhận thao tác kéo thả và Lasso Selection.
+   ================================================================ */
+
+.list-section {
+  flex: 1;
+
+  min-height: 0;
+
+  position: relative;
+
+  overflow: auto;
+
+  padding: 0 28px 28px;
+
+  background: var(--bg-content);
+}
+
+/* Thanh cuộn hiện đại */
+.list-section::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.list-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list-section::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+
+  border-radius: 999px;
+}
+
+.list-section::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ================================================================
+   ZONE 18: LIST CONTAINER - KHUNG DANH SÁCH CLOUD
+   ================================================================ */
+
+.list-container {
+  width: 100%;
+
+  overflow: visible;
+
+  background: #ffffff;
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* ================================================================
+   ZONE 19: LIST HEADER - TIÊU ĐỀ CÁC CỘT
+   ================================================================ */
+
+.list-header {
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  color: var(--text-secondary);
+
+  background: #f8fafc;
+
+  border-bottom: 1px solid var(--border-light);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   ZONE 20: CẤU TRÚC KÍCH THƯỚC CÁC CỘT
+   ---------------------------------------------------------------
+   Giữ bố cục ổn định giữa Header và từng hàng dữ liệu.
+   ================================================================ */
+
+.col-name {
+  flex: 1;
+
+  min-width: 220px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.col-date {
+  width: 210px;
+
+  flex-shrink: 0;
+
+  color: var(--text-secondary);
+}
+
+.col-owner {
+  width: 150px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--text-secondary);
+}
+
+.col-location {
+  width: 100px;
+
+  flex-shrink: 0;
+
+  color: var(--text-secondary);
+}
+
+.col-action {
+  width: 52px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================================================
+   ZONE 21: LIST ROW - TỪNG FILE / THƯ MỤC
+   ================================================================ */
+
+.list-row {
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8px 16px;
+
+  position: relative;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Không cần đường viền ở hàng cuối */
+.list-row:last-child {
+  border-bottom: none;
+
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* Hover từng tài nguyên */
+.list-row:hover {
+  background: #f8fafc;
+}
+
+/* Trạng thái tài nguyên đang được chọn */
+.list-row.row-selected {
+  background: var(--bg-selected);
+}
+
+.list-row.row-selected:hover {
+  background: #dce9fd;
+}
+
+/* ================================================================
+   ZONE 22: THUMBNAIL - ẢNH THU NHỎ
+   ================================================================ */
+
+.row-thumbnail-box {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #f1f5f9;
+
+  border: 1px solid var(--border-light);
+  border-radius: 9px;
+}
+
+/* Ảnh bên trong thumbnail */
+.row-thumb {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform var(--transition-normal);
+}
+
+/* Zoom nhẹ khi rê vào hàng */
+.list-row:hover .row-thumb {
+  transform: scale(1.06);
+}
+
+/* Icon thư mục / album */
+.file-icon-img {
+  width: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 27px;
+}
+
+/* ================================================================
+   ZONE 23: TÊN FILE
+   ================================================================ */
+
+.file-name-text {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: var(--text-primary);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Khi hover hàng, tên file nổi bật nhẹ */
+.list-row:hover .file-name-text {
+  color: #0f172a;
+}
+
+/* ================================================================
+   ZONE 24: OWNER AVATAR
+   ================================================================ */
+
+.owner-avatar {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+
+  background: var(--primary);
+
+  border-radius: 50%;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ================================================================
+   ZONE 25: CHECKBOX
+   ================================================================ */
+
+.item-checkbox {
+  width: 17px;
+  height: 17px;
+
+  margin: 0;
+
+  cursor: pointer;
+
+  accent-color: var(--primary);
+}
+
+/* ================================================================
+   ZONE 26: MENU BA CHẤM
+   ================================================================ */
+
+.more-action-container {
+  position: relative;
+}
+
+/* Nút ba chấm */
+.btn-dots {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  color: var(--text-secondary);
+
+  background: transparent;
+
+  border: none;
+  border-radius: 50%;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.btn-dots:hover {
+  color: var(--text-primary);
+
+  background: #e9eef5;
+}
+
+/*
+   Dropdown của nút ba chấm nằm bên phải hàng.
+   Ghi đè vị trí mặc định của .dropdown-menu.
+*/
+.more-action-container > .dropdown-menu {
+  top: calc(100% + 4px);
+  right: 0;
+
+  min-width: 210px;
+}
+
+/* ================================================================
+   ZONE 27: LASSO SELECTION
+   ---------------------------------------------------------------
+   Khung xanh xuất hiện khi giữ chuột và kéo để chọn nhiều file.
+   ================================================================ */
+
+.selection-lasso {
+  position: fixed;
+
+  pointer-events: none;
+
+  background: rgba(37, 99, 235, 0.1);
+
+  border: 1px solid rgba(37, 99, 235, 0.55);
+  border-radius: 4px;
+
+  z-index: 1000;
+}
+/* ================================================================
+   ZONE 28: EMPTY STATE - TRẠNG THÁI KHÔNG CÓ DỮ LIỆU
+   ---------------------------------------------------------------
+   Hiển thị khi:
+   - Drive chưa có ảnh
+   - Thùng rác trống
+   - Một tính năng chưa được triển khai
+   ================================================================ */
+
+.empty-state {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-secondary);
+
+  text-align: center;
+}
+
+/* Tiêu đề trong Empty State */
+.empty-state h3 {
+  margin: 0 0 8px;
+
+  color: var(--text-primary);
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Nội dung mô tả */
+.empty-state p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ================================================================
+   ZONE 29: DRAG & DROP UPLOAD
+   ---------------------------------------------------------------
+   App.jsx hiện có một số inline style cho khu vực này.
+   CSS dưới đây bổ sung hiệu ứng và chuẩn bị cho bước dọn JSX sau.
+   ================================================================ */
+
+.drag-drop-zone {
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow: none;
+
+  transition:
+    border-color var(--transition-normal),
+    background var(--transition-normal),
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+/* Hover khi người dùng rê chuột vào vùng upload */
+.drag-drop-zone:hover {
+  border-color: var(--primary) !important;
+
+  background: var(--primary-light) !important;
+
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* Tạo lớp sáng nhẹ phía trên khu vực upload */
+.drag-drop-zone::before {
+  content: "";
+
+  width: 180px;
+  height: 180px;
+
+  position: absolute;
+
+  top: -100px;
+  right: -80px;
+
+  pointer-events: none;
+
+  background: rgba(37, 99, 235, 0.06);
+
+  border-radius: 50%;
+}
+
+/* ================================================================
+   ZONE 30: LOADING OVERLAY
+   ---------------------------------------------------------------
+   Hiển thị khi:
+   - Đồng bộ dữ liệu từ S3
+   - Upload ảnh
+   - Xóa ảnh
+   ================================================================ */
+
+.loading-overlay {
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(248, 250, 252, 0.82) !important;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  z-index: 9999 !important;
+
+  animation: loadingFadeIn 0.2s ease;
+}
+
+/* Nội dung thông báo Loading */
+.loading-overlay p {
+  margin-top: 16px !important;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  font-weight: 600 !important;
+}
+
+/* ================================================================
+   ZONE 31: LOADING SPINNER
+   ================================================================ */
+
+.spinner {
+  width: 44px;
+  height: 44px;
+
+  border: 4px solid #dbeafe;
+  border-top-color: var(--primary);
+
+  border-radius: 50%;
+
+  animation: spinnerRotate 0.75s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ================================================================
+   ZONE 32: PREVIEW OVERLAY - XEM ẢNH TOÀN MÀN HÌNH
+   ---------------------------------------------------------------
+   Khi click vào ảnh, Preview sẽ mở trên toàn bộ màn hình.
+   ================================================================ */
+
+.preview-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(15, 23, 42, 0.96);
+
+  z-index: 5000;
+
+  animation: previewFadeIn 0.2s ease;
+}
+
+/* ================================================================
+   ZONE 33: PREVIEW HEADER
+   ================================================================ */
+
+.preview-header {
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 12px 24px;
+
+  color: #ffffff;
+
+  background: rgba(15, 23, 42, 0.94);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tên file đang được Preview */
+.preview-title {
+  min-width: 0;
+
+  overflow: hidden;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Nhóm nút bên phải Preview */
+.preview-header-buttons {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+/* ================================================================
+   ZONE 34: PREVIEW ACTION BUTTONS
+   ================================================================ */
+
+.btn-preview-action,
+.btn-preview-close {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 14px;
+
+  color: #ffffff;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* Nút sao chép đường dẫn */
+.btn-preview-action {
+  background: rgba(255, 255, 255, 0.1);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn-preview-action:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Nút đóng Preview */
+.btn-preview-close {
+  background: transparent;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn-preview-close:hover {
+  background: rgba(239, 68, 68, 0.18);
+
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+.btn-preview-action:active,
+.btn-preview-close:active {
+  transform: scale(0.97);
+}
+
+/* ================================================================
+   ZONE 35: PREVIEW BODY
+   ================================================================ */
+
+.preview-body {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  overflow: hidden;
+}
+
+/* Ảnh kích thước lớn */
+.full-preview-img {
+  display: block;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  border-radius: 6px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  animation: previewImageZoom 0.25s ease;
+}
+
+/* ================================================================
+   ZONE 36: PREVIEW ANIMATIONS
+   ================================================================ */
+
+@keyframes previewFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes previewImageZoom {
+  from {
+    opacity: 0;
+
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* ================================================================
+   ZONE 37: ANIMATION CHUNG
+   ---------------------------------------------------------------
+   App.jsx hiện đang tham chiếu animation "fadeIn".
+   Khai báo tại đây để tránh animation không tồn tại.
+   ================================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+/* ================================================================
+   ZONE 38: AUTHENTICATION PAGE
+   ---------------------------------------------------------------
+   Màn hình đăng nhập và đăng ký theo phong cách Cloud hiện đại.
+   Giữ nguyên toàn bộ logic JWT hiện tại.
+   ================================================================ */
+
+.auth-container {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px;
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.12),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(14, 165, 233, 0.1),
+      transparent 30%
+    ),
+    #f8fafc;
+}
+
+/* ================================================================
+   ZONE 39: AUTH BACKGROUND DECORATION
+   ---------------------------------------------------------------
+   Tạo các khối ánh sáng trang trí nhẹ mà không cần thêm JSX.
+   ================================================================ */
+
+.auth-container::before,
+.auth-container::after {
+  content: "";
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(4px);
+}
+
+.auth-container::before {
+  width: 340px;
+  height: 340px;
+
+  top: -160px;
+  right: -100px;
+
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.auth-container::after {
+  width: 280px;
+  height: 280px;
+
+  bottom: -140px;
+  left: -80px;
+
+  background: rgba(14, 165, 233, 0.08);
+}
+
+/* ================================================================
+   ZONE 40: AUTH CARD
+   ================================================================ */
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+
+  padding: 40px;
+
+  position: relative;
+  z-index: 2;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 22px;
+
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.1),
+    0 4px 12px rgba(15, 23, 42, 0.04);
+
+  animation: authCardAppear 0.35s ease;
+}
+
+/* ================================================================
+   ZONE 41: AUTH BRAND / LOGO
+   ================================================================ */
+
+.auth-logo {
+  margin: 0 0 12px;
+
+  color: var(--primary);
+
+  font-size: 25px;
+  font-weight: 750;
+
+  text-align: center;
+
+  letter-spacing: -0.6px;
+}
+
+/* Tiêu đề đăng nhập / đăng ký */
+.auth-title {
+  margin: 0 0 30px;
+
+  color: var(--text-primary);
+
+  font-size: 20px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+/* ================================================================
+   ZONE 42: AUTH FORM
+   ================================================================ */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* Mỗi nhóm Label + Input */
+.input-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+/* Nhãn của trường nhập liệu */
+.input-group label {
+  color: var(--text-primary);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Ô nhập Username / Password */
+.input-group input {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 15px;
+
+  color: var(--text-primary);
+
+  background: #ffffff;
+
+  border: 1px solid var(--border-medium);
+  border-radius: 11px;
+
+  outline: none;
+
+  font-size: 14px;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+/* Placeholder */
+.input-group input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Trạng thái khi người dùng đang nhập */
+.input-group input:focus {
+  border-color: var(--primary);
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+
+  background: #ffffff;
+}
+
+/* ================================================================
+   ZONE 43: AUTH SUBMIT BUTTON
+   ================================================================ */
+
+.btn-auth-submit {
+  width: 100%;
+  height: 50px;
+
+  margin-top: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+
+  background: var(--primary);
+
+  border: none;
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Hover nút đăng nhập */
+.btn-auth-submit:hover {
+  background: var(--primary-hover);
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.24);
+}
+
+/* Hiệu ứng nhấn nút */
+.btn-auth-submit:active {
+  transform: translateY(0);
+
+  box-shadow: 0 5px 14px rgba(37, 99, 235, 0.18);
+}
+
+/* ================================================================
+   ZONE 44: AUTH SWITCH
+   ---------------------------------------------------------------
+   Chuyển qua lại giữa:
+   - Đăng nhập
+   - Đăng ký tài khoản
+   ================================================================ */
+
+.auth-switch {
+  margin-top: 24px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid var(--border-light);
+
+  text-align: center;
+}
+
+.auth-switch p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Link chuyển chế độ đăng nhập / đăng ký */
+.auth-switch span {
+  margin-left: 4px;
+
+  color: var(--primary);
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: color var(--transition-fast);
+}
+
+.auth-switch span:hover {
+  color: var(--primary-hover);
+
+  text-decoration: underline;
+}
+
+/* ================================================================
+   ZONE 45: AUTH ANIMATION
+   ================================================================ */
+
+@keyframes authCardAppear {
+  from {
+    opacity: 0;
+
+    transform: translateY(14px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+}
+/* ================================================================
+   ZONE 46: RESPONSIVE - LAPTOP MÀN HÌNH NHỎ
+   ---------------------------------------------------------------
+   Thu gọn Sidebar và ẩn bớt các cột ít quan trọng.
+   ================================================================ */
+
+@media (max-width: 1200px) {
+  :root {
+    --sidebar-width: 230px;
+  }
+
+  /* Thu gọn khoảng cách Header */
+  .header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Thanh tìm kiếm được phép chiếm nhiều không gian hơn */
+  .search-box {
+    width: min(520px, 58%);
+  }
+
+  /* Giảm chiều rộng cột ngày tải lên */
+  .col-date {
+    width: 170px;
+  }
+
+  /* Ẩn cột vị trí để tiết kiệm không gian */
+  .col-location {
+    display: none;
+  }
+
+  /* Giảm padding khu vực danh sách */
+  .list-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* ================================================================
+   ZONE 47: RESPONSIVE - TABLET
+   ---------------------------------------------------------------
+   Sidebar tiếp tục thu nhỏ.
+   Ẩn các thông tin phụ trong danh sách tài nguyên.
+   ================================================================ */
+
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 200px;
+  }
+
+  /* Sidebar gọn hơn */
+  .sidebar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Logo nhỏ hơn một chút */
+  .logo {
+    font-size: 18px;
+  }
+
+  /* Header giảm khoảng cách */
+  .header {
+    gap: 14px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Search chiếm toàn bộ phần trống còn lại */
+  .search-box {
+    flex: 1;
+
+    width: auto;
+  }
+
+  /* Ẩn tên người dùng để tránh Header bị chật */
+  .user-actions > span {
+    display: none;
+  }
+
+  /* Ẩn cột ngày */
+  .col-date {
+    display: none;
+  }
+
+  /* Cột Owner nhỏ lại */
+  .col-owner {
+    width: 110px;
+  }
+
+  /* Giảm padding danh sách */
+  .list-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Preview giảm padding */
+  .preview-body {
+    padding: 20px;
+  }
+}
+
+/* ================================================================
+   ZONE 48: RESPONSIVE - MOBILE
+   ---------------------------------------------------------------
+   Chuyển Sidebar thành thanh điều hướng nhỏ bên trái.
+   Chỉ giữ các nội dung cần thiết nhất.
+   ================================================================ */
+
+@media (max-width: 680px) {
+  :root {
+    --sidebar-width: 76px;
+    --header-height: 68px;
+  }
+
+  /* Sidebar dạng compact */
+  .sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+
+    align-items: center;
+
+    padding: 18px 8px;
+  }
+
+  /*
+     Ẩn tên thương hiệu dài.
+     Icon Cloud vẫn có thể được giữ nếu JSX tách icon riêng sau này.
+  */
+  .logo {
+    width: 100%;
+
+    margin: 0 0 22px;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    font-size: 0;
+  }
+
+  /* Hiển thị biểu tượng Cloud thay cho tên dài */
+  .logo::before {
+    content: "☁️";
+
+    font-size: 28px;
+  }
+
+  /* Nút Mới chuyển thành nút vuông */
+  .btn-new {
+    width: 52px;
+    height: 52px;
+
+    padding: 0;
+
+    border-radius: 16px;
+
+    font-size: 0;
+  }
+
+  /* Chỉ hiển thị dấu cộng */
+  .plus-icon {
+    font-size: 28px;
+  }
+
+  /* Menu sidebar căn giữa */
+  .menu-list {
+    width: 100%;
+
+    align-items: center;
+  }
+
+  /*
+     Do menu hiện tại chứa text trực tiếp,
+     thu gọn font để tránh tràn giao diện.
+     Sau này có thể thêm icon riêng trong JSX.
+  */
+  .menu-item {
+    width: 52px;
+    min-height: 48px;
+
+    justify-content: center;
+
+    padding: 0 6px;
+
+    overflow: hidden;
+
+    font-size: 10px;
+
+    text-align: center;
+  }
+
+  /* Dropdown nút Mới mở sang bên phải */
+  .new-dropdown {
+    top: 0;
+    left: calc(100% + 10px);
+
+    width: 230px;
+  }
+
+  /* Header */
+  .header {
+    padding: 10px 12px;
+  }
+
+  /* Thanh tìm kiếm nhỏ hơn */
+  .search-box {
+    height: 44px;
+
+    padding: 0 12px;
+  }
+
+  /* Nút đăng xuất gọn hơn */
+  .btn-outline {
+    min-width: 44px;
+
+    padding: 0 10px;
+
+    font-size: 12px;
+  }
+
+  /* Danh sách sát cạnh hơn trên Mobile */
+  .list-section {
+    padding: 0 10px 18px;
+  }
+
+  /* Giảm padding hàng dữ liệu */
+  .list-row,
+  .list-header {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Chỉ giữ cột tên file */
+  .col-owner {
+    display: none;
+  }
+
+  /* Tên file được phép co lại */
+  .col-name {
+    min-width: 0;
+  }
+
+  /* Thumbnail nhỏ hơn */
+  .row-thumbnail-box {
+    width: 42px;
+    height: 42px;
+  }
+
+  .file-icon-img {
+    width: 42px;
+
+    font-size: 24px;
+  }
+
+  /* Auth page */
+  .auth-container {
+    padding: 20px;
+  }
+
+  .auth-card {
+    padding: 30px 24px;
+
+    border-radius: 18px;
+  }
+
+  /* Preview Header */
+  .preview-header {
+    min-height: 62px;
+
+    padding: 10px 14px;
+  }
+
+  /* Ẩn chữ dài của nút Copy nếu không đủ chỗ */
+  .btn-preview-action,
+  .btn-preview-close {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 12px;
+  }
+
+  .preview-body {
+    padding: 12px;
+  }
+}
+
+/* ================================================================
+   ZONE 49: MOBILE SIÊU NHỎ
+   ---------------------------------------------------------------
+   Tối ưu cho màn hình khoảng 480px trở xuống.
+   ================================================================ */
+
+@media (max-width: 480px) {
+  /* Thu nhỏ thêm Sidebar */
+  :root {
+    --sidebar-width: 66px;
+  }
+
+  /* Ẩn icon Search để dành diện tích cho input */
+  .search-box > span {
+    display: none;
+  }
+
+  /* Font tìm kiếm nhỏ hơn */
+  .search-box input {
+    font-size: 13px;
+  }
+
+  /* Header chỉ giữ Search + Logout */
+  .user-actions {
+    gap: 6px;
+  }
+
+  /* Thu nhỏ nút Logout */
+  .btn-outline {
+    min-width: 38px;
+
+    padding: 0 8px;
+  }
+
+  /* Tên file nhỏ hơn một chút */
+  .file-name-text {
+    font-size: 13px;
+  }
+
+  /* Cột action nhỏ hơn */
+  .col-action {
+    width: 42px;
+  }
+
+  /* Dropdown thao tác tránh vượt màn hình */
+  .more-action-container > .dropdown-menu {
+    right: -4px;
+
+    min-width: 190px;
+  }
+
+  /* Auth Card gần full width */
+  .auth-card {
+    padding: 28px 20px;
+  }
+
+  .auth-logo {
+    font-size: 22px;
+  }
+
+  .auth-title {
+    font-size: 18px;
+  }
+}
+
+/* ================================================================
+   ZONE 50: ACCESSIBILITY - GIẢM CHUYỂN ĐỘNG
+   ---------------------------------------------------------------
+   Tôn trọng cài đặt Reduce Motion của hệ điều hành.
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}
+/* ================================================================
+   BUTTONS - TRASH ACTIONS
+   ================================================================ */
+
+.btn-move-trash,
+.btn-restore,
+.btn-permanent-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+  min-height: 42px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+/* Chuyển vào thùng rác */
+.btn-move-trash {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.btn-move-trash:hover {
+  background: #fee2e2;
+}
+
+/* Khôi phục */
+.btn-restore {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.btn-restore:hover {
+  background: #dbeafe;
+}
+
+/* Xóa vĩnh viễn */
+.btn-permanent-delete {
+  background: #dc2626;
+  color: white;
+}
+
+.btn-permanent-delete:hover {
+  background: #b91c1c;
+}

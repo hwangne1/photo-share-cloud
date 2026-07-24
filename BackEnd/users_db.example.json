@@ -1,0 +1,14 @@
+{
+  "abc1": {
+    "password": "$2b$12$.5Vu2BxCBMh/OZ5f5cp4iuk9f4a28/xvhDKPd4.q1ns4IPICYmdHS",
+    "favorites": []
+  },
+  "abc": {
+    "password": "$2b$12$rqXqi/uaEdG9RZIMQMy4i./CpyJ1ksCKzwytEym1oOWScz33z1jaO",
+    "favorites": []
+  },
+  "admin": {
+    "password": "$2b$12$k11kHPmg.8gJFO4n.HDAIup4VYueMrxGED8CAqmYdhb1Pv2CMhcRS",
+    "favorites": ["admin/abc.jpg", "admin/xyz.png"]
+  }
+}

@@ -343,4 +343,5 @@ Hoang Pham
 
 Đồ án môn **Điện toán đám mây**
 
-Trường Đại học ...
+Trường Đại học :HUFLIT
+
